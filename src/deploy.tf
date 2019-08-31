@@ -10,7 +10,7 @@ resource "azurerm_container_registry" "this" {
   resource_group_name      = azurerm_resource_group.this.name
   admin_enabled            = true
   sku                      = var.sku_name
-  georeplication_locations = ["southafricawest"]
+  # georeplication_locations = ["southafricawest"]
   tags                     = var.tags
   depends_on               = [azurerm_resource_group.this]
 }
