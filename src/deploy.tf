@@ -4,13 +4,13 @@ resource "azurerm_resource_group" "this" {
   tags     = var.tags
 }
 
-# resource "azurerm_container_registry" "this" {
-#   name                     = var.container_registry_name
-#   location                 = azurerm_resource_group.this.location
-#   resource_group_name      = azurerm_resource_group.this.name
-#   admin_enabled            = true
-#   sku                      = var.sku_name
-#   # georeplication_locations = ["southafricawest"]
-#   tags                     = var.tags
-#   depends_on               = [azurerm_resource_group.this]
-# }
+resource "azurerm_container_registry" "this" {
+  name                     = var.container_registry_name
+  location                 = azurerm_resource_group.this.location
+  resource_group_name      = azurerm_resource_group.this.name
+  admin_enabled            = true
+  sku                      = var.sku_name
+  # georeplication_locations = ["southafricawest"]
+  tags                     = var.tags
+  depends_on               = [azurerm_resource_group.this]
+}
