@@ -1,8 +1,29 @@
 provider "azurerm" {
-  version = "1.33.1"
+  version = "~>2.30.0"
+  features {}
+}
 
-  client_id       = var.client_id
-  client_secret   = var.client_secret
-  subscription_id = var.subscription_id
-  tenant_id       = var.tenant_id
+terraform {
+  required_version = "~>0.12.0"
+  backend "local" {}
+}
+
+module "rg" {
+  source = "./modules/resource_group"
+
+  resource_group_create   = var.resource_group_create
+  resource_group_name     = var.resource_group_name
+  resource_group_location = var.location
+  tags                    = var.tags
+}
+
+module "cr" {
+  source = "./modules/container_registry"
+
+  container_registry_create = var.container_registry_create
+  container_registry_name   = var.container_registry_name
+  container_registry_sku    = var.container_registry_sku
+  resource_group_name       = module.rg.name
+  resource_group_location   = module.rg.location
+  tags                      = var.tags
 }

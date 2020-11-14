@@ -1,0 +1,39 @@
+pr: none
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+
+variables:
+- name: tags_location
+  value: $(location)
+- name: tags_managed_by
+  value: $(managed_by)
+
+stages:
+- template: build-stage.yml
+  parameters:
+    displayName: package scripts
+    stageName: package
+    pathtoPublish: $(Build.SourcesDirectory)/src
+
+- template: release-stage.yml
+  parameters:
+    condition: succeeded()
+    dependsOn: package
+    displayName: release prod (southafricanorth)
+    environment: prod (southafricanorth)
+    stageName: release_prd_we
+    variableTemplate: release-variables-zn-prd.yml
+
+- template: terraform-stage.yml
+  parameters:
+    condition: succeeded()
+    dependsOn: package
+    displayName: destroy prod (southafricanorth)
+    environment: prod (southafricanorth)
+    stageName: destroy_prd_we
+    templateName: terraform-steps-destroy.yml
+    variableTemplate: release-variables-zn-prd.yml

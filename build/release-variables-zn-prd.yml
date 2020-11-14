@@ -1,0 +1,18 @@
+variables:
+- group: PreProd - Terraform CLI
+- name: container_registry_create
+  value: true
+- name: container_registry_name
+  value: titansoft
+- name: container_registry_sku
+  value: standard
+- name: location
+  value: westeurope
+- name: resource_group_create
+  value: true
+- name: resource_group_name
+  value: azrg-devp-zn-shared
+- name: tags_environment
+  value: Development
+- name: workspace_name
+  value: best-practices-we-dev
