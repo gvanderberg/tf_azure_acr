@@ -13,6 +13,6 @@ resource "azurerm_container_registry" "this" {
   resource_group_name      = var.resource_group_name
   admin_enabled            = true
   sku                      = var.container_registry_sku
-  georeplication_locations = ["northeurope"]
+  georeplication_locations = var.container_registry_sku == "premium" ? ["northeurope"] : null
   tags                     = var.tags
 }
