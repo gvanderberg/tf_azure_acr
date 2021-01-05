@@ -1,11 +1,5 @@
-provider "azurerm" {
-  version = "~>2.30.0"
-  features {}
-}
-
 terraform {
-  required_version = "~>0.12.0"
-  backend "local" {}
+  backend "remote" {}
 }
 
 module "rg" {

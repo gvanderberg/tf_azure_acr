@@ -1,0 +1,18 @@
+variables:
+  - group: Prod - Terraform Credentials
+  - name: container_registry_create
+    value: true
+  - name: container_registry_name
+    value: titansoft
+  - name: container_registry_sku
+    value: basic
+  - name: location
+    value: westeurope
+  - name: resource_group_create
+    value: false
+  - name: resource_group_name
+    value: azrg-prd-we-titansoft
+  - name: tags_environment
+    value: Production
+  - name: workspace_name
+    value: azure-cr-we-prd
